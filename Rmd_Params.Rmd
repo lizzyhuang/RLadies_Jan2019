@@ -1,0 +1,44 @@
+---
+title: "R Markdown w Params"
+author: "Lizzy Huang"
+date: "January 9, 2019"
+output: html_document
+params:
+  mpg:
+    label: "Miles per gallon"
+    value: 20
+    input: slider
+    min: 15
+    max: 30
+    step: 0.5
+    sep: ""
+  cyl:
+    label: "Number of cylinders"
+    value: 4
+    input: select
+    choices: [4, 6, 8]
+  printcode:
+    label: "Display Code:"
+    value: TRUE
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Use Parameters
+
+```{r get-params}
+mpg = params$mpg
+cyl = params$cyl
+printcode = params$printcode
+```
+
+```{r table, warning=FALSE, message=FALSE, echo = printcode}
+library(ggplot2)
+data(mtcars)
+knitr::kable(mtcars[mtcars$cyl == cyl, ])
+```
+
+
