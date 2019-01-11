@@ -1,0 +1,162 @@
+---
+title: "R Markdown Examples"
+author: "Lizzy Huang"
+date: "January 9, 2019"
+output:
+  html_document:
+    fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---------------------------------------------------------
+
+## Basics
+
+### Inline Text Formatting
+
+1. We can add **bold text** using a pair double \* to wrap the text like this: ```` **bold text** ````.
+
+
+2. As for *italic*, we only need one \* or underscore \_ on each side: ```` *italic* ```` or ```` _italic_ ````.
+
+3. "Short" superscripts say r^2^ are done by a pair of carets \^: ```` r^2^````. "Short" subscripts like x~i~ is ```` x~i~ ````. 
+
+4. To mark text as inline code, we use a pair of 4 backticks. <code> &#96;&#96;&#96;&#96;summary(cars) &#96;&#96;&#96;&#96; </code>  will give ````summary(cars)````.
+
+5. Footnotes  ```` ^[I am a footnote] ```` will result in ^[I am a footnote].
+
+6. Hyperlinks are in the format of ````[my text](and my link)````. For example: [RStudio](www.rstudio.org) is created by ```` [RStudio](www.rstudio.org) ````
+
+7. Image are inserted as ````![my image caption](my path to image)````. For example: ````[R Markdown Sticker](RmdSticker.jpg)```` will give us
+
+![R Markdown Sticker](C:/RLadies/RmdSticker.jpg)
+
+
+
+----------------------------------------------------------
+
+### Book-Level Elements
+
+#### Section Headers
+
+We use ````# Section````, ```` ## Subsection ```` to distinguish the levels of each section.
+
+# Section (The Largest)
+
+## Subsection (A Little Smaller)
+
+### Subsubsection (Shrinking...)
+
+#### And so on.....
+
+<br>
+
+#### List Items
+
+```` -````, ````*````, or ````+```` (unordered) or numbers (ordered) and 4 indents
+
+
+- Item 1
+    - Its sub item
+    + Another sub item
+    * One more sub item
+    
+##### Ordered list: 
+
+1. The first item
+    - Its sub item
+2. The second item
+3. And so on....
+
+-----------------------------------------------------------------
+
+### Math Expressions under LaTex
+
+1. Inline math formula: wrapped by a pair of single dollar signs ```` $ your math formula $```` $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left({-\frac{(x-\mu)^2}{2\sigma^2}}\right)$.
+
+2. Math expressions in a separate line: wrapped by a pair of double dollar signs ````$$ your math expression $$```` or a pair of squared brackets ```` \[ your math expression \] ````:
+
+$$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left({-\frac{(x-\mu)^2}{2\sigma^2}}\right) $$
+
+\[ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left({-\frac{(x-\mu)^2}{2\sigma^2}}\right) \]
+
+3. Many other LaTex syntaxes are similar, say superscripts and subscripts $\text{This is}^{\text{my superscript}}$ and $\text{This is}_{\text{my subscript}}$. 
+
+---------------------------------------------------------
+
+### R Code Chunk and Inline R Code
+
+1. R code inside R code chunk
+
+<pre><code> ```{r my-code-chunk}
+summary(cars)
+``` </code></pre>
+
+2. External images using ```` knitr::include_graphics(my_path_to_image)````
+
+```{r ext-image}
+knitr::include_graphics(path = "C:/RLadies/RmdSticker.jpg")
+```
+
+3. Tables using ```` knitr::kable(your data frame) ````
+
+```{r table}
+knitr::kable(cars[1:4, ])
+```
+
+
+4. Inline R code `` `r '\x60 r 1 + 1\x60'` ``: `r 1+1` or even `` `r '\x60r sum(cars$speed) \x60'` ``: `r sum(cars$speed)`. 
+
+5. Include R script using ```` source(your R script)````
+
+
+------------------------------------------------------
+
+
+## Polish Your Report
+
+### R Code Chunk Options
+
+1. ````echo```` and  ````eval````
+
+```{r a-simple-plot}
+plot(cars, main = "Original Plot")   # my original plot
+```
+
+```{r with-no-code, echo = FALSE}
+plot(cars, main = "Plot With No Code (echo=FALSE)")  # plot without showing the code
+```
+
+
+```{r with-no-evaluation, eval=FALSE}
+plot(cars)  # code that is not evaluated
+```
+
+2. ```` results = 'hide'```` and ```` results = 'asis' ````
+```{r a-simple-summary}
+summary(cars)
+```
+
+```{r with-no-result, results = 'hide'}
+summary(cars)   # result is hidden
+```
+
+```{r shown-as-plain-text, results = 'asis'}
+summary(cars)   # result as plain text
+```
+
+\newline
+
+3. Options for figures
+
+```{r my-fig, fig.width = 6, fig.height = 2, fig.align = 'right'}
+plot(cars)  # Plot with customized size and alignment
+```
+
+
+
+
+
